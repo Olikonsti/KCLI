@@ -1,2 +1,2 @@
-global taskimport; taskimport = ['RESTORE', 'PYGEO']
+global taskimport; taskimport = ['RESTORE']
 global tasklist; tasklist = []
