@@ -6,6 +6,7 @@ class PACKET():
         self.interpreter = None
         self.info = "Generic Packet info..."
         self.name = "PACKET"
+        self.version = "v1.0"
 
     def giveInterpreter(self, interpreter):
         self.interpreter = interpreter
@@ -32,6 +33,8 @@ class PACKET():
                 console.log(self.info)
             elif args[0].upper() == "SETUP":
                 self.setup()
+            elif args[0].upper() == "VERSION":
+                console.log(self.name + " : [cyan]" + self.version)
             else:
                 ret = 0
         else:

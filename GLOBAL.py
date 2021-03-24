@@ -1,5 +1,5 @@
 
-VERSION = "v0.2"
+VERSION = "v0.3"
 VERSIONTYPE = "UNSAFE"
 
 INTERPRETER = []
@@ -9,7 +9,7 @@ DATAFOLDER2 = "DATA\\"
 
 SERVERURL = "http://k.kundv.org/downloads/KCLI_PACKAGES/"
 
-ADDONS = ["HELP", "STARTTASKS", "UTIL", "IMPORT", "INSTALL", "UNINSTALL", "UPDATE"]
+ADDONS = ["HELP", "STARTTASKS", "UTIL", "IMPORT", "INSTALL", "UNINSTALL", "UPDATE", "-------"]
 
 
 print("Starting...")

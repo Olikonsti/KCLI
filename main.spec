@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['main.py'],
-             pathex=['X:\\Programming-Python\\Programs\\KCLI'],
+             pathex=['Y:\\Programming\\Programming-Python\\Programs\\KCLI'],
              binaries=[],
              datas=[],
              hiddenimports=[],

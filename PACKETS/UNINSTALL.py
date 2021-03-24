@@ -21,4 +21,5 @@ class UNINSTALL(PACKET):
         except Exception as e:
             console.log("[red]" + str(e))
         self.interpreter.askCommand("starttasks removeimport " + package)
+        self.interpreter.askCommand("util unload " + args[0])
         console.log("finished!")

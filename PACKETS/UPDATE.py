@@ -13,5 +13,6 @@ class UPDATE(PACKET):
         else:
             return 0
 
+
         self.interpreter.askCommand("uninstall " + args[0])
         self.interpreter.askCommand("install " + args[0])

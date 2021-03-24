@@ -12,11 +12,11 @@ class INSTALL(PACKET):
     def runanimation(self):
         print("/\r", end="\r")
         time.sleep(0.1)
-        print("-\r", end="\r")
+        print(" -\r", end="\r")
         time.sleep(0.1)
-        print("\\\r", end="\r")
+        print("  \\\r", end="\r")
         time.sleep(0.1)
-        print("-\r", end="\r")
+        print("   -\r", end="\r")
 
     def animationloop(self):
         while self.installing:

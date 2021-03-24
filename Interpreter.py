@@ -15,7 +15,7 @@ class Interpreter():
 
         self.cmd = ""
         self.running = True
-        self.ADDONS = ADDONS
+        self.ADDONS = ADDONS.copy()
 
         self.loadedPackages = {}
 
@@ -76,4 +76,4 @@ class Interpreter():
             module.giveInterpreter(self)
             module.run(self.args)
         else:
-            print("[red]This command/addon is unknown. Import it with import <dest>")
+            print("[red]This command/addon is unknown. Import it with 'import <dest>' or install it with 'install <packet>'")
