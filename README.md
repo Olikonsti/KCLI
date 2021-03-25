@@ -15,7 +15,9 @@ My own CLI for installing many programs without extracting zip folders
 
     edit the .py file (the packet script)
     Example:
-    ```python
+
+```python
+
 from PACKET import *
 
 PACKETNAME = "PYGEO"
@@ -51,6 +53,6 @@ class PYGEO(PACKET):
 
             return 0
 
-        os.system("cd " + DATAFOLDER + "EXTERNPACKAGES/" + self.name + "/ & main.exe")```
-        
-   fdksljfd
+        os.system("cd " + DATAFOLDER + "EXTERNPACKAGES/" + self.name + "/ & main.exe")
+ ```
+ oudshao
