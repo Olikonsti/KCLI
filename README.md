@@ -33,6 +33,7 @@ class PYGEO(PACKET):
 
         self.name = "PYGEO"
         self.info = "a math plotting program"
+        self.version = "v1.1"
 
     def setup(self):
         self.download_dependency("dist.zip")
@@ -55,4 +56,4 @@ class PYGEO(PACKET):
 
         os.system("cd " + DATAFOLDER + "EXTERNPACKAGES/" + self.name + "/ & main.exe")
  ```
- oudshao
+
