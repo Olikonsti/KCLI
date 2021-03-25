@@ -53,4 +53,7 @@ class PYGEO(PACKET):
 
         os.system("cd " + DATAFOLDER + "EXTERNPACKAGES/" + self.name + "/ & main.exe")      # this line executes the .exe of the packet
  ```
+ Download a working KCLI Package here:
+    [PYGEO.zip](https://github.com/Olikonsti/KCLI/files/6204400/PYGEO.zip)
+
 
