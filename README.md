@@ -1,7 +1,7 @@
 # KCLI
 My own CLI for installing many programs without extracting zip folders
 
-##Creating a KCLI Package
+## Creating a KCLI Package
 
 - step 1:
 
