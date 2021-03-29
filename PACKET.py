@@ -4,40 +4,49 @@ from GLOBAL import *
 class PACKET():
     def __init__(self):
         self.interpreter = None
-        self.info = "Generic Packet info..."
-        self.name = "PACKET"
-        self.version = "v1.0"
+        self.packinfo = "Generic Packet info..."
+        self.packname = "PACKET"
+        self.packversion = "v1.0"
 
     def giveInterpreter(self, interpreter):
         self.interpreter = interpreter
 
-    def setup(self):
+    def setup(self, args=None):
         console.log("This Packet does not have a setup function.")
+
+    def info(self, args):
+        console.log(self.packinfo)
+
+    def version(self, args):
+        console.log(self.packversion)
 
     def unzip(self, zipFilePath, zipFile):
         with zipfile.ZipFile(zipFilePath + zipFile, 'r') as zip_ref:
             zip_ref.extractall(zipFilePath)
         os.system("del " + zipFilePath + zipFile)
 
+    def loadExternClass(self, filename):
+        console.log(f"Startig load of extern class: {filename}")
+        f = open(str(DATAFOLDER) + "/EXTERNPACKAGES/" + str(self.packname) + "/" + filename, "r")
+        code = f.read()
+        f.close()
+        try:
+            exec(f"global mainclass;" + code)
+            console.log(f"finished loading of {filename}")
+
+        except Exception as e:
+            console.log(f"[red]An error in the Subpacket ({filename}) in the Packet ({self.packname}) accoured: {e}")
+
+        retVar = mainclass
+        return retVar
+
+
+
     def download_dependency(self, file):
-        r = requests.get(str(SERVERURL) + "/" + str(self.name) + "/" + file)
-        with open(str(DATAFOLDER) + "/EXTERNPACKAGES/" + str(self.name) + "/" + str(file), 'wb') as pypdf:
+        r = requests.get(str(SERVERURL) + "/" + str(self.packname) + "/" + file)
+        with open(str(DATAFOLDER) + "/EXTERNPACKAGES/" + str(self.packname) + "/" + str(file), 'wb') as pypdf:
             pypdf.write(r.content)
 
-    def run(self, args):
-
-        ret = 1
-
-        if len(args) > 0:
-            if args[0].upper() == "INFO":
-                console.log(self.info)
-            elif args[0].upper() == "SETUP":
-                self.setup()
-            elif args[0].upper() == "VERSION":
-                console.log(self.name + " : [cyan]" + self.version)
-            else:
-                ret = 0
-        else:
-            ret = 0
-
-        return ret
+    def run(self):
+        console.log("[yellow] The Packet.run(args) has been depreciated!!! Please use Packet.runasfunctions from now on!")
+        return 0

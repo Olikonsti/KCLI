@@ -4,15 +4,12 @@ class UNINSTALL(PACKET):
     def __init__(self):
         PACKET.__init__(self)
 
-        self.info = "A Packet to remove extern packets from the interpreter"
+        self.packinfo = "A Packet to remove extern packets from the interpreter"
 
-    def run(self, args):
+    def run(self):
+        console.log(self.packinfo)
 
-        if len(args) > 0 and PACKET.run(self, args) == 0:
-            pass
-        else:
-            return 0
-
+    def set(self, args):
         package = args[0].upper()
         console.log("starting deletion of " + args[0].upper())
         os.system('rmdir /S ' + DATAFOLDER2 + "EXTERNPACKAGES\\" + args[0].upper())

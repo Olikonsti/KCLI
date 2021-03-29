@@ -4,7 +4,7 @@ class INSTALL(PACKET):
     def __init__(self):
         PACKET.__init__(self)
 
-        self.info = "A Packet to install extern packets into the interpreter\n" \
+        self.packinfo = "A Packet to install extern packets into the interpreter\n" \
                     "'list'"
 
         self.installing = True
@@ -22,17 +22,11 @@ class INSTALL(PACKET):
         while self.installing:
             self.runanimation()
 
-    def run(self, args):
+    def run(self):
+        console.log(self.packinfo)
 
-        if len(args) > 0 and PACKET.run(self, args) == 0:
-            pass
-        else:
-            return 0
 
-        if args[0].upper() == "LIST":
-            os.system("start " + SERVERURL)
-            return 0
-
+    def get(self, args):
         if args[0].upper() not in self.interpreter.ADDONS:
             pass
         else:
@@ -49,7 +43,7 @@ class INSTALL(PACKET):
             f.close()
 
 
-            self.interpreter.askCommand("import " + DATAFOLDER + "EXTERNPACKAGES/" + package + "/" + package)
+            self.interpreter.askCommand("import set " + DATAFOLDER + "EXTERNPACKAGES/" + package + "/" + package)
             self.interpreter.askCommand("starttasks addimport " + package)
             console.log("starting setup...")
             console.log("[yellow]The installation can take a while...\n\n")
@@ -62,3 +56,6 @@ class INSTALL(PACKET):
 
         else:
             console.log("[red]Packet not fond on the server " + SERVERURL)
+
+    def list(self, args):
+        os.system("start " + SERVERURL)

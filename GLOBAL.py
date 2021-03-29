@@ -1,5 +1,5 @@
 
-VERSION = "v0.3"
+VERSION = "v0.4"
 VERSIONTYPE = "UNSAFE"
 
 INTERPRETER = []
@@ -7,7 +7,14 @@ INTERPRETER = []
 DATAFOLDER = "DATA/"
 DATAFOLDER2 = "DATA\\"
 
-SERVERURL = "http://k.kundv.org/downloads/KCLI_PACKAGES/"
+try:
+    f = open(DATAFOLDER + "PACKSERVER.txt", "r")
+    SERVERURL = f.read()
+    f.close()
+except Exception as e:
+    print("Could not find file: " + DATAFOLDER + "PACKSERVER.txt \n\n" + str(e))
+    print("This means KCLI does not know where to find extern packages!")
+    input("Press enter to try to start KCLI anyway...")
 
 ADDONS = ["HELP", "STARTTASKS", "UTIL", "IMPORT", "INSTALL", "UNINSTALL", "UPDATE", "-------"]
 

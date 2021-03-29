@@ -21,7 +21,7 @@ class Interpreter():
 
 
 
-        self.askCommand("starttasks run")
+        self.askCommand("starttasks")
 
         while self.running:
             self.askCommand()
@@ -36,13 +36,13 @@ class Interpreter():
             return str(e)
 
     def utilLoadPackage(self, args):
-        if args[2].upper() in self.ADDONS:
-            if args[1].upper() in self.loadedPackages:
+        if args[1].upper() in self.ADDONS:
+            if args[0].upper() in self.loadedPackages:
                 console.log("[red]A packet is already loaded with that name!")
             else:
-                execstring = "global module; module = " + args[2].upper() + "()"
+                execstring = "global module; module = " + args[1].upper() + "()"
                 exec(execstring)
-                self.loadedPackages[args[1].upper()] = module
+                self.loadedPackages[args[0].upper()] = module
                 module.giveInterpreter(self)
 
         else:
@@ -66,14 +66,26 @@ class Interpreter():
         self.args.remove(self.cmd[0])
         if self.cmd[0] in self.loadedPackages:
             try:
-                self.loadedPackages[self.cmd[0]].run(self.args)
+                if len(self.cmd) > 1:
+                    self.args.remove(self.cmd[1])
+                    exec("self.loadedPackages[self.cmd[0]]." + str(self.cmd[1]) + "(" + str(self.args) + ")")
+                else:
+                    self.loadedPackages[self.cmd[0]].run()
             except Exception as e:
                 console.log("[red]An Error accoured: " + str(e))
         elif self.cmd[0] in self.ADDONS:
             execstring = "global module; module = " + self.cmd[0]+ "()"
             exec(execstring)
-            self.loadedPackages[self.cmd[0]] = module
-            module.giveInterpreter(self)
-            module.run(self.args)
+            try:
+
+                self.loadedPackages[self.cmd[0]] = module
+                module.giveInterpreter(self)
+                if len(self.cmd) > 1:
+                    self.args.remove(self.cmd[1])
+                    exec("module." + str(self.cmd[1]) + "(" + str(self.args) + ")")
+                else:
+                    module.run()
+            except Exception as e:
+                console.log("[red]An Error accoured: " + str(e))
         else:
             print("[red]This command/addon is unknown. Import it with 'import <dest>' or install it with 'install <packet>'")

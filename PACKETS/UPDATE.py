@@ -4,15 +4,11 @@ class UPDATE(PACKET):
     def __init__(self):
         PACKET.__init__(self)
 
-        self.info = "A Packet to update extern packets"
+        self.packinfo = "A Packet to update extern packets"
 
-    def run(self, args):
+    def run(self):
+        console.log(self.packinfo)
 
-        if len(args) > 0 and PACKET.run(self, args) == 0:
-            pass
-        else:
-            return 0
-
-
-        self.interpreter.askCommand("uninstall " + args[0])
-        self.interpreter.askCommand("install " + args[0])
+    def get(self, args):
+        self.interpreter.askCommand("uninstall set " + args[0])
+        self.interpreter.askCommand("install get " + args[0])
