@@ -1,5 +1,6 @@
 
-VERSION = "v0.4"
+VERSION = "v0.5"
+PYTHONVERSION = "3.9"
 VERSIONTYPE = "UNSAFE"
 
 INTERPRETER = []
@@ -35,6 +36,11 @@ console.log("[yellow]Loading tkinter...")
 from tkinter import *
 console.log("[green]Tkinter set up finished")
 
+console.log("[yellow]Loading functools...")
+import functools
+fp = functools.partial
+console.log("[green]functools set up finished")
+
 console.log("[yellow]Loading tkinter.ttk...")
 import tkinter.ttk as ttk
 console.log("[green]Tkinter.ttk set up finished")
@@ -42,6 +48,7 @@ console.log("[green]Tkinter.ttk set up finished")
 console.log("[yellow]Loading os...")
 import os
 console.log("[green]os set up finished")
+os.system("title KCLI-" + VERSION + "-py" + PYTHONVERSION)
 
 console.log("[yellow]Loading requests...")
 import requests

@@ -26,19 +26,16 @@ class PACKET():
         os.system("del " + zipFilePath + zipFile)
 
     def loadExternClass(self, filename):
-        console.log(f"Startig load of extern class: {filename}")
         f = open(str(DATAFOLDER) + "/EXTERNPACKAGES/" + str(self.packname) + "/" + filename, "r")
         code = f.read()
         f.close()
         try:
             exec(f"global mainclass;" + code)
-            console.log(f"finished loading of {filename}")
 
         except Exception as e:
             console.log(f"[red]An error in the Subpacket ({filename}) in the Packet ({self.packname}) accoured: {e}")
 
-        retVar = mainclass
-        return retVar
+        return mainclass
 
 
 
