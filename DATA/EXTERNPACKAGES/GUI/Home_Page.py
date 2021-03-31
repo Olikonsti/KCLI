@@ -25,12 +25,10 @@ class mainclass(Frame):
                 a = packet.BUTTON(packet, self.installed_packs_frame.interior, i)
                 a.pack()
 
-
-
         self.update_task()
 
     def update_task(self):
-        self.after(1000, self.update_task)
+        self.after(2000, self.update_task)
 
         # Packet starter frame refresh
         if self.installed_packs_shown == self.packet.interpreter.ADDONS:
@@ -40,9 +38,6 @@ class mainclass(Frame):
             self.installed_packs_frame.destroy()
             self.installed_packs_frame = self.packet.VerticalScrolledFrame(self.installed_packs_frame_border)
             self.installed_packs_frame.pack(fill=Y, expand=True)
-
-            console.log(self.installed_packs_shown)
-            console.log(self.packet.interpreter.ADDONS)
 
             for i in self.installed_packs_shown.copy():
                 if i not in self.packet.interpreter.ADDONS:
@@ -54,6 +49,5 @@ class mainclass(Frame):
                 else:
                     if i not in self.installed_packs_shown:
                         self.installed_packs_shown.append(i)
-                        console.log("appended: " + i)
                     a = self.packet.BUTTON(self.packet, self.installed_packs_frame.interior, i)
                     a.pack()
