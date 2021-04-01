@@ -25,3 +25,9 @@ class mainclass(Frame):
                                                                         f"Developer: Konstantin Ehmann\n")
 
         self.KCLIgui_Label.pack(anchor=NW)
+
+        ttk.Button(self.leftframe, text="Creator Website", command=lambda: os.system("start http://ksite.ddns.net")).pack(anchor=NW)
+        ttk.Button(self.leftframe, text="Creator Github",
+                   command=lambda: os.system("start https://github.com/Olikonsti")).pack(anchor=NW)
+        ttk.Button(self.leftframe, text="KCLI Github",
+                   command=lambda: os.system("start https://github.com/Olikonsti/KCLI")).pack(anchor=NW)

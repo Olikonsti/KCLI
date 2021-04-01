@@ -1,5 +1,5 @@
 
-VERSION = "v0.5"
+VERSION = "v0.6"
 PYTHONVERSION = "3.9"
 VERSIONTYPE = "UNSAFE"
 
@@ -34,7 +34,12 @@ console.log("[green]Print set up finished")
 
 console.log("[yellow]Loading tkinter...")
 from tkinter import *
+from tkinter import messagebox
 console.log("[green]Tkinter set up finished")
+
+console.log("[yellow]Loading threading...")
+import threading
+console.log("[green]Threading set up finished")
 
 console.log("[yellow]Loading functools...")
 import functools

@@ -8,7 +8,7 @@ class GUI(PACKET):
 
         self.packname = "GUI"
         self.packinfo = "A KCLI Program GUI"
-        self.packversion = "v0.3"
+        self.packversion = "v0.4"
 
     def setup(self, args=None):
         self.download_dependency("icon.ico")
@@ -16,16 +16,16 @@ class GUI(PACKET):
         self.download_dependency("About_Page.py")
         self.download_dependency("Home_Page.py")
         self.download_dependency("Manage_Packages_Page.py")
+        self.download_dependency("Pack_Page.py")
+        self.download_dependency("Loading_Page.py")
         self.download_dependency("VerticalScrolledFrame.py")
 
     def run(self):
 
-        for i in range(100):
-            self.interpreter.ADDONS.append(str(i))
-
-
         self.BUTTON = self.loadExternClass("BUTTON.py")
+        self.Loading_Page = self.loadExternClass("Loading_Page.py")
         self.About_Page = self.loadExternClass("About_Page.py")
+        self.Pack_Page = self.loadExternClass("Pack_Page.py")
         self.Home_Page = self.loadExternClass("Home_Page.py")
         self.Manage_Packages_Page = self.loadExternClass("Manage_Packages_Page.py")
         self.VerticalScrolledFrame = self.loadExternClass("VerticalScrolledFrame.py")

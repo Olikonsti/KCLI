@@ -1,12 +1,25 @@
 import tkinter.ttk as ttk
 from tkinter import *
 
-class mainclass(ttk.Button):
+class mainclass(Frame):
     def __init__(self, packet, parent, item):
         self.item = item
         self.packet = packet
-        ttk.Button.__init__(self, parent)
-        self.config(command=self.click, text=self.item)
+        Frame.__init__(self, parent)
+
+        self.button = ttk.Button(self)
+        self.button.config(command=self.click, text=self.item)
+        self.button.pack(fill=X, side=LEFT, expand=True)
+
+        if item == "GUI":
+            self.button.config(command=lambda: console.log("An Error Accoured: HANDLE CANCELLED"))
+
+        self.openPageButton = ttk.Button(self, text="...", width=3, command=self.open_PackPage)
+        self.openPageButton.pack(side=LEFT)
+
+    def open_PackPage(self):
+        self.packet.notebook.pack_forget()
+        self.packet.Pack_Page(self.packet.window, self.packet, self.item)
 
     def click(self, event=None):
         self.packet.interpreter.askCommand(self.item)

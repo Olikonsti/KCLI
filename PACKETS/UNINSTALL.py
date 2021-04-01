@@ -12,7 +12,7 @@ class UNINSTALL(PACKET):
     def set(self, args):
         package = args[0].upper()
         console.log("starting deletion of " + args[0].upper())
-        os.system('rmdir /S ' + DATAFOLDER2 + "EXTERNPACKAGES\\" + args[0].upper())
+        os.system('rmdir /S /Q ' + DATAFOLDER2 + "EXTERNPACKAGES\\" + args[0].upper())
         try:
             self.interpreter.ADDONS.remove(package)
         except Exception as e:
