@@ -17,11 +17,13 @@ class GUI(PACKET):
         self.download_dependency("Home_Page.py")
         self.download_dependency("Manage_Packages_Page.py")
         self.download_dependency("Pack_Page.py")
+        self.download_dependency("Loading_Page.py")
         self.download_dependency("VerticalScrolledFrame.py")
 
     def run(self):
 
         self.BUTTON = self.loadExternClass("BUTTON.py")
+        self.Loading_Page = self.loadExternClass("Loading_Page.py")
         self.About_Page = self.loadExternClass("About_Page.py")
         self.Pack_Page = self.loadExternClass("Pack_Page.py")
         self.Home_Page = self.loadExternClass("Home_Page.py")

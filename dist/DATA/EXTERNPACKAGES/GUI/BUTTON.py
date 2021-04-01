@@ -11,6 +11,9 @@ class mainclass(Frame):
         self.button.config(command=self.click, text=self.item)
         self.button.pack(fill=X, side=LEFT, expand=True)
 
+        if item == "GUI":
+            self.button.config(command=lambda: console.log("An Error Accoured: HANDLE CANCELLED"))
+
         self.openPageButton = ttk.Button(self, text="...", width=3, command=self.open_PackPage)
         self.openPageButton.pack(side=LEFT)
 

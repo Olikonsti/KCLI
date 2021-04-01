@@ -46,6 +46,9 @@ class mainclass(Frame):
         self.update_button = ttk.Button(self.actionsContainer, text="Update", command=self.update_app)
         self.update_button.pack()
 
+        # properties
+        
+
     def exit_window(self):
         self.destroy()
         self.packet_onTop.notebook.pack(

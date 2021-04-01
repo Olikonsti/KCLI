@@ -43,12 +43,37 @@ class mainclass(Frame):
         self.uninstall_button = ttk.Button(self.actionsContainer, text="Uninstall", command=self.uninstall_app)
         self.uninstall_button.pack()
 
+        self.update_button = ttk.Button(self.actionsContainer, text="Update", command=self.update_app)
+        self.update_button.pack()
+
+        # properties
+        
+
     def exit_window(self):
         self.destroy()
         self.packet_onTop.notebook.pack(
             expand=True, fill=BOTH)
 
     def uninstall_app(self):
-        a = threading.Thread(target=lambda: self.packet_onTop.interpreter.askCommand("UNINSTALL set " + self.packet))
-        a.start()
+        response = messagebox.askquestion(title="Deletion Warning", message=f"Are you sure, that you want to delete {self.packet}?")
+        if response == "yes":
+            a = threading.Thread(target=lambda: self.packet_onTop.interpreter.askCommand("UNINSTALL set " + self.packet))
+            a.start()
+            self.exit_window()
+
+    def launch_loading_screen(self, thread):
+        self.pack_forget()
+        loading_page = self.packet_onTop.Loading_Page(self.packet_onTop.window, self.packet_onTop)
+        while thread.is_alive():
+            self.packet_onTop.window.update()
+        loading_page.destroy()
         self.exit_window()
+
+    def update_app(self):
+        response = messagebox.askquestion(title="Update Warning",
+                                          message=f"Are you sure? Data of the packet {self.packet} might get lost!")
+        if response == "yes":
+
+            a = threading.Thread(target=lambda: self.packet_onTop.interpreter.askCommand("UPDATE get " + self.packet))
+            a.start()
+            self.launch_loading_screen(a)

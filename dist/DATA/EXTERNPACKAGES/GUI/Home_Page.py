@@ -24,7 +24,7 @@ class mainclass(Frame):
         self.installed_packs_frame = packet.VerticalScrolledFrame(self.installed_packs_frame_border, width=400)
         self.installed_packs_frame.pack(fill=BOTH, expand=True)
 
-        self.exclusion_list = ["RESTORE", "GUI"]
+        self.exclusion_list = ["RESTORE"]
         self.installed_packs_shown = []
 
         for i in packet.interpreter.ADDONS:
