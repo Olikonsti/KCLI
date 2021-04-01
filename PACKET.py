@@ -20,6 +20,13 @@ class PACKET():
     def version(self, args):
         console.log(self.packversion)
 
+    def givePacketInstance(self, packet):
+        response = self.interpreter.initializePacket(packet)
+        if response == 1:
+            return None
+        else:
+            return self.interpreter.loadedPackages[packet]
+
     def unzip(self, zipFilePath, zipFile):
         with zipfile.ZipFile(zipFilePath + zipFile, 'r') as zip_ref:
             zip_ref.extractall(zipFilePath)

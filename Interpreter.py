@@ -46,8 +46,18 @@ class Interpreter():
                 module.giveInterpreter(self)
 
         else:
-            console.log("[red] Unknown Packet/ unknown error")
+            console.log("[red]Unknown Packet/ unknown error")
 
+    def initializePacket(self, packet):
+        execstring = "global module; module = " + packet + "()"
+        try:
+            exec(execstring)
+            self.loadedPackages[packet] = module
+            module.giveInterpreter(self)
+            return 0
+        except:
+            console.log(f"[red]Error Packet {packet} was not found in the kernel!")
+            return 1
 
 
     def askCommand(self, cmd=None):

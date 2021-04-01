@@ -8,5 +8,5 @@ class mainclass(ttk.Button):
         ttk.Button.__init__(self, parent)
         self.config(command=self.click, text=self.item)
 
-    def click(self):
+    def click(self, event=None):
         self.packet.interpreter.askCommand(self.item)
