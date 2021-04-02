@@ -1,6 +1,7 @@
 .idea
+build
 __pycache__
-*.pyc
 *.html
 *.xml
 *.iml
+*.cpython-39.pyc

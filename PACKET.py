@@ -12,7 +12,7 @@ class PACKET():
         self.interpreter = interpreter
 
     def setup(self, args=None):
-        console.log("This Packet does not have a setup function.")
+        self.download_dependency("1icon.png")
 
     def info(self, args):
         console.log(self.packinfo)

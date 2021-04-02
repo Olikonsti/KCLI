@@ -37,6 +37,11 @@ from tkinter import *
 from tkinter import messagebox
 console.log("[green]Tkinter set up finished")
 
+console.log("[yellow]Loading PIL...")
+from PIL import Image
+from PIL import ImageTk
+console.log("[green]PIL set up finished")
+
 console.log("[yellow]Loading threading...")
 import threading
 console.log("[green]Threading set up finished")

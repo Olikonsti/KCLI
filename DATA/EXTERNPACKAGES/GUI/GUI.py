@@ -8,9 +8,10 @@ class GUI(PACKET):
 
         self.packname = "GUI"
         self.packinfo = "A KCLI Program GUI"
-        self.packversion = "v0.4"
+        self.packversion = "0.5"
 
     def setup(self, args=None):
+        PACKET.setup(self)
         self.download_dependency("icon.ico")
         self.download_dependency("BUTTON.py")
         self.download_dependency("About_Page.py")

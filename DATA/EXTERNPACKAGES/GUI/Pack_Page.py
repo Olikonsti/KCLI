@@ -1,6 +1,8 @@
 from tkinter import *
 import tkinter.ttk as ttk
 from GLOBAL import *
+from PIL import Image
+from PIL import ImageTk
 
 class mainclass(Frame):
     def __init__(self, parent, packet_onTop, packet):
@@ -36,18 +38,45 @@ class mainclass(Frame):
         self.actionsContainer = Frame(self.topframe, width=70, height=40, bg="red")
         self.actionsContainer.pack(side=LEFT, anchor=S, pady=20)
 
-        self.properties = Frame(self.topframe, bg="green")
-        self.properties.pack(side=RIGHT, fill=BOTH, expand=True, pady=10, padx=10)
+        self.properties = Frame(self.topframe)
+        self.properties.pack(side=RIGHT, fill=BOTH, expand=True, pady=30, padx=30)
+
+        # properties
+        self.packet_onTop.interpreter.initializePacket(packet)
+        if requests.get(SERVERURL + "/" + packet + "/" + "1version.txt").status_code == 200:
+            Label(self.properties, text="Newest Version            " + requests.get(
+                SERVERURL + "/" + packet + "/" + "1version.txt").text).pack(anchor=NW)
+        Label(self.properties, text="Installed Version            " + self.packet_onTop.interpreter.loadedPackages[
+            packet].packversion).pack(anchor=NW)
+
+        if requests.get(SERVERURL + "/" + packet + "/" + "1developer.txt").status_code == 200:
+            Label(self.properties, text="Developer:     " + requests.get(
+                SERVERURL + "/" + packet + "/" + "1developer.txt").text).pack(anchor=NW)
+
+
 
         # actions
+        if self.packet != "GUI":
+            self.start_button = ttk.Button(self.actionsContainer, text="Start", command=lambda: self.packet_onTop.interpreter.askCommand(self.packet))
+            self.start_button.pack()
+        if requests.get(SERVERURL + "/" + packet + "/" + "1version.txt").status_code == 200:
+            if float(self.packet_onTop.interpreter.loadedPackages[packet].packversion) < float(requests.get(SERVERURL + "/" + packet + "/" + "1version.txt").text):
+                self.update_button = ttk.Button(self.actionsContainer, text="Update", command=self.update_app)
+                self.update_button.pack()
+
+
+
         self.uninstall_button = ttk.Button(self.actionsContainer, text="Uninstall", command=self.uninstall_app)
         self.uninstall_button.pack()
 
-        self.update_button = ttk.Button(self.actionsContainer, text="Update", command=self.update_app)
-        self.update_button.pack()
 
-        # properties
-        
+
+
+        # icon_loading
+        self.icon = Image.open(DATAFOLDER + "EXTERNPACKAGES/" + self.packet + "/1icon.png").convert("RGBA")
+        self.icon = self.icon.resize((200, 200), Image.BOX)
+        self.image = ImageTk.PhotoImage(self.icon)
+        self.packImageContainer.create_image(100, 100, image=self.image)
 
     def exit_window(self):
         self.destroy()
