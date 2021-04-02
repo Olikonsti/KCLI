@@ -5,3 +5,4 @@ __pycache__
 *.xml
 *.iml
 *.cpython-39.pyc
+*.pyc

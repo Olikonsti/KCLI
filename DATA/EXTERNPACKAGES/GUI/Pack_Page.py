@@ -46,11 +46,11 @@ class mainclass(Frame):
         if requests.get(SERVERURL + "/" + packet + "/" + "1version.txt").status_code == 200:
             Label(self.properties, text="Newest Version            " + requests.get(
                 SERVERURL + "/" + packet + "/" + "1version.txt").text).pack(anchor=NW)
-        Label(self.properties, text="Installed Version            " + self.packet_onTop.interpreter.loadedPackages[
+        Label(self.properties, text="Installed Version          " + self.packet_onTop.interpreter.loadedPackages[
             packet].packversion).pack(anchor=NW)
 
         if requests.get(SERVERURL + "/" + packet + "/" + "1developer.txt").status_code == 200:
-            Label(self.properties, text="Developer:     " + requests.get(
+            Label(self.properties, text="Developer:                    " + requests.get(
                 SERVERURL + "/" + packet + "/" + "1developer.txt").text).pack(anchor=NW)
 
 
