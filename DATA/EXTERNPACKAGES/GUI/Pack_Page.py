@@ -29,8 +29,8 @@ class mainclass(Frame):
 
         self.topframe = Frame(self.scrollregion.interior, height=200)
         self.topframe.pack(side=TOP, fill=X, expand=True, anchor=NW)
-        self.bottomframe = ttk.LabelFrame(self.scrollregion, text="KCLI Gui")
-        self.bottomframe.pack(side=BOTTOM)
+        self.bottomframe = ttk.LabelFrame(self.scrollregion.interior, text="Packet info")
+        self.bottomframe.pack(side=TOP, fill=BOTH, expand=True, anchor=NW, padx=10, pady=10)
 
         self.packImageContainer = Canvas(self.topframe, width=200, height=200, bg="blue", highlightthickness=0)
         self.packImageContainer.pack(side=LEFT, pady=10, padx=10)
@@ -39,7 +39,7 @@ class mainclass(Frame):
         self.actionsContainer.pack(side=LEFT, anchor=S, pady=20)
 
         self.properties = Frame(self.topframe)
-        self.properties.pack(side=RIGHT, fill=BOTH, expand=True, pady=30, padx=30)
+        self.properties.pack(side=RIGHT, expand=True, pady=30, padx=30)
 
         # properties
         self.packet_onTop.interpreter.initializePacket(packet)
@@ -64,8 +64,6 @@ class mainclass(Frame):
                 self.update_button = ttk.Button(self.actionsContainer, text="Update", command=self.update_app)
                 self.update_button.pack()
 
-
-
         self.uninstall_button = ttk.Button(self.actionsContainer, text="Uninstall", command=self.uninstall_app)
         self.uninstall_button.pack()
 
@@ -77,6 +75,11 @@ class mainclass(Frame):
         self.icon = self.icon.resize((200, 200), Image.BOX)
         self.image = ImageTk.PhotoImage(self.icon)
         self.packImageContainer.create_image(100, 100, image=self.image)
+
+        # packInfo
+        if requests.get(SERVERURL + "/" + packet + "/" + "1info.txt").status_code == 200:
+            self.infoLabel = Label(self.bottomframe, text=requests.get(SERVERURL + "/" + packet + "/" + "1info.txt").text)
+            self.infoLabel.pack(anchor=NW, padx=10, pady=10)
 
     def exit_window(self):
         self.destroy()
