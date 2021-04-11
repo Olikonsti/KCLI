@@ -1,5 +1,5 @@
 
-VERSION = "v0.6"
+VERSION = "v0.7"
 PYTHONVERSION = "3.9"
 VERSIONTYPE = "UNSAFE"
 
@@ -31,6 +31,10 @@ console.log("[green]Console set up finished")
 console.log("[yellow]Loading rich.print...")
 from rich import print
 console.log("[green]Print set up finished")
+
+console.log("[yellow]Loading bs4...")
+from bs4 import BeautifulSoup
+console.log("[green]bs4 set up finished")
 
 console.log("[yellow]Loading tkinter...")
 from tkinter import *
