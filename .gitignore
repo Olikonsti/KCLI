@@ -1,4 +1,3 @@
-.idea
 build
 __pycache__
 *.html
@@ -6,3 +5,4 @@ __pycache__
 *.iml
 *.cpython-39.pyc
 *.pyc
+.idea
