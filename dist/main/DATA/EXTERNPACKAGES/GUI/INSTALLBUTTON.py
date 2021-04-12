@@ -9,7 +9,7 @@ class mainclass(Frame):
         self.install_mng = install_mng
         Frame.__init__(self, parent)
 
-        self.button = ttk.Button(self)
+        self.button = ttk.Button(self, width=30)
         self.button.config(command=self.click, text=self.item)
         self.button.pack(fill=X, side=LEFT, expand=True)
 

@@ -8,6 +8,18 @@ class mainclass(Frame):
         Frame.__init__(self, notebook)
         self.packet = packet
 
+        self.message_field_border = ttk.LabelFrame(self, text="Message")
+        self.message_field_border.pack(side=RIGHT, fill=BOTH, expand=True, pady=5, padx=5)
+
+        self.message_field = packet.VerticalScrolledFrame(self.message_field_border)
+        self.message_field.pack(fill=BOTH, expand=True, anchor=NW, side=LEFT)
+
+        if requests.get(SERVERURL + "/" + "message.txt").status_code == 200:
+            Label(self.message_field.interior, text=requests.get(
+                SERVERURL + "/message.txt").text, justify=LEFT).pack(anchor=NW, pady=5, padx=5)
+
+
+
         self.installed_packs_frame_border = ttk.LabelFrame(self, text="Installed Packages")
         self.installed_packs_frame_border.pack(side=LEFT, fill=Y, pady=5, padx=5)
 

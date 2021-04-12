@@ -8,7 +8,7 @@ class GUI(PACKET):
 
         self.packname = "GUI"
         self.packinfo = "A KCLI Program GUI"
-        self.packversion = "0.5"
+        self.packversion = "0.7"
 
     def setup(self, args=None):
         PACKET.setup(self)

@@ -8,7 +8,7 @@ class GUI(PACKET):
 
         self.packname = "GUI"
         self.packinfo = "A KCLI Program GUI"
-        self.packversion = "0.5"
+        self.packversion = "0.9"
 
     def setup(self, args=None):
         PACKET.setup(self)
@@ -32,6 +32,13 @@ class GUI(PACKET):
         self.Home_Page = self.loadExternClass("Home_Page.py")
         self.Manage_Packages_Page = self.loadExternClass("Manage_Packages_Page.py")
         self.VerticalScrolledFrame = self.loadExternClass("VerticalScrolledFrame.py")
+
+        if requests.get(SERVERURL + "/" + "GUI" + "/" + "1version.txt").status_code == 200:
+            if float(self.packversion) < float(
+                    requests.get(SERVERURL + "/" + "GUI"+ "/" + "1version.txt").text):
+                console.log("\nA new Version of the KCLI Gui is available...")
+                console.log(f"\n[green]Updating KCLI Gui to version [cyan]" + requests.get(SERVERURL + "/" + "GUI"+ "/" + "1version.txt").text + "[green] ... Please wait\n")
+                self.interpreter.askCommand("UPDATE get GUI")
 
         self.window = Tk()
         self.window.geometry("800x500")

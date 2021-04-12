@@ -69,16 +69,12 @@ class mainclass(Frame):
     def install(self, pack):
         a = threading.Thread(target=lambda: self.packet.interpreter.askCommand("INSTALL get " + pack))
         a.start()
+        message = Label(self.packet.window, text=f"Install task for {pack} is running... Please wait", fg="white", bg="green")
+        message.pack(fill=X)
         self.exit_window()
-        #self.launch_loading_screen(a)
-
-    def launch_loading_screen(self, thread):
-        self.packet.notebook.pack_forget()
-        loading_page = self.packet.Loading_Page(self.packet.window, self.packet)
-        while thread.is_alive():
+        while a.is_alive():
             self.packet.window.update()
-        loading_page.destroy()
-        self.exit_window()
+        message.destroy()
 
     def get_url_paths(self, url, ext='', params={}):
         response = requests.get(url, params=params)
