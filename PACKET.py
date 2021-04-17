@@ -11,6 +11,9 @@ class PACKET():
     def giveInterpreter(self, interpreter):
         self.interpreter = interpreter
 
+    def uninstall(self):
+        console.log(f"packed {self.packname} will now run its uninstall task!")
+
     def setup(self, args=None):
         self.download_dependency("1icon.png")
 

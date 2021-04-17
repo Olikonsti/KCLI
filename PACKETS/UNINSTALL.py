@@ -11,6 +11,11 @@ class UNINSTALL(PACKET):
 
     def set(self, args):
         package = args[0].upper()
+        self.interpreter.initializePacket(package)
+        pack_instance = self.interpreter.loadedPackages[package]
+        pack_instance.uninstall()
+
+
         console.log("starting deletion of " + args[0].upper())
         os.system('rmdir /S /Q ' + DATAFOLDER2 + "EXTERNPACKAGES\\" + args[0].upper())
         try:
@@ -19,4 +24,4 @@ class UNINSTALL(PACKET):
             console.log("[red]" + str(e))
         self.interpreter.askCommand("starttasks removeimport " + package)
         self.interpreter.askCommand("util unload " + args[0])
-        console.log("finished!")
+        console.log("\n\n\nfinished!")

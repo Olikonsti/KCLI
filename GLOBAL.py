@@ -1,5 +1,5 @@
 
-VERSION = "v0.7"
+VERSION = "v1.0"
 PYTHONVERSION = "3.9"
 VERSIONTYPE = "UNSAFE"
 
@@ -31,6 +31,10 @@ console.log("[green]Console set up finished")
 console.log("[yellow]Loading rich.print...")
 from rich import print
 console.log("[green]Print set up finished")
+
+console.log("[yellow]Loading pygame...")
+import pygame
+console.log("[green]pygame set up finished")
 
 console.log("[yellow]Loading bs4...")
 from bs4 import BeautifulSoup

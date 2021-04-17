@@ -17,7 +17,9 @@ class STARTTASKS(PACKET):
             for i in taskimport:
                 console.log("Starting import of " + i)
                 self.interpreter.askCommand("import set " + DATAFOLDER + "EXTERNPACKAGES/" + i + "/" + i)
+            console.log("\n")
             for i in tasklist:
+                console.log(f"Running Task '{i}'")
                 self.interpreter.askCommand(i)
 
         except Exception as e:
@@ -51,6 +53,27 @@ class STARTTASKS(PACKET):
                 w += i + " "
             console.log("adding Starttask " + w)
             tasklist.append(w)
+            f = open(DATAFOLDER + "STARTTASKS/STARTTASKS.py", "w")
+            f.write(
+                "global taskimport; taskimport = " + str(taskimport) + "\nglobal tasklist; tasklist = " + str(tasklist))
+            f.close()
+        except Exception as e:
+            console.log("[red]" + str(e))
+
+    def remove(self, args):
+        try:
+
+            f = open(DATAFOLDER + "STARTTASKS/STARTTASKS.py", "r")
+            exec(f.read())
+            f.close()
+            w = ""
+            for i in args[0:]:
+                w += i + " "
+            if w in tasklist:
+                tasklist.remove(w)
+                console.log("removing Starttask " + w)
+            else:
+                console.log(f"Starttask '{w}' not in list")
             f = open(DATAFOLDER + "STARTTASKS/STARTTASKS.py", "w")
             f.write(
                 "global taskimport; taskimport = " + str(taskimport) + "\nglobal tasklist; tasklist = " + str(tasklist))

@@ -1,2 +1,2 @@
-cd main
-main
+cd KCLI_DATA
+KCLI
