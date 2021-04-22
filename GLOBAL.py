@@ -42,6 +42,7 @@ console.log("[green]bs4 set up finished")
 
 console.log("[yellow]Loading tkinter...")
 from tkinter import *
+from tkinter import filedialog
 from tkinter import messagebox
 console.log("[green]Tkinter set up finished")
 

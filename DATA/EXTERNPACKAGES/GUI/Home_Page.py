@@ -3,15 +3,17 @@ import tkinter.ttk as ttk
 from GLOBAL import *
 
 
-class mainclass(Frame):
+class mainclass(ttk.Frame):
     def __init__(self, notebook, packet):
-        Frame.__init__(self, notebook)
+        ttk.Frame.__init__(self, notebook)
         self.packet = packet
 
-        self.RIGHTFRAME = Frame(self)
+        self.config(width=70)
+
+        self.RIGHTFRAME = ttk.Frame(self)
         self.RIGHTFRAME.pack(side=RIGHT, fill=BOTH, expand=True)
 
-        self.shortcutbar = Frame(self.RIGHTFRAME)
+        self.shortcutbar = ttk.Frame(self.RIGHTFRAME)
         self.shortcutbar.pack(side=TOP, fill=X)
 
         self.updateall = ttk.Button(self.shortcutbar, text="Update all (WIP)")
@@ -31,14 +33,14 @@ class mainclass(Frame):
             code = f'txt_ = {txt}'
             exec(f"global txt_; txt_ = f'''{txt}'''")
 
-            Label(self.message_field.interior, text=txt_, justify=LEFT).pack(anchor=NW, pady=5, padx=5)
+            ttk.Label(self.message_field.interior, text=txt_, justify=LEFT).pack(anchor=NW, pady=5, padx=5)
 
 
 
         self.installed_packs_frame_border = ttk.LabelFrame(self, text="Installed Packages")
         self.installed_packs_frame_border.pack(side=LEFT, fill=Y, pady=5, padx=5)
 
-        self.searchframe = Frame(self.installed_packs_frame_border)
+        self.searchframe = ttk.Frame(self.installed_packs_frame_border)
         self.searchframe.pack()
         self.searchBox = ttk.Entry(self.searchframe)
         self.searchBox.pack(side=LEFT)
@@ -51,7 +53,7 @@ class mainclass(Frame):
         self.installed_packs_frame = packet.VerticalScrolledFrame(self.installed_packs_frame_border, width=400)
         self.installed_packs_frame.pack(fill=BOTH, expand=True)
 
-        self.exclusion_list = ["-------"] + ADDONS
+        self.exclusion_list = ["-------"] #+ ADDONS
         self.installed_packs_shown = []
 
         for i in packet.interpreter.ADDONS:
@@ -91,7 +93,7 @@ class mainclass(Frame):
     def redraw_frame(self):
         # clear frame
         self.installed_packs_frame.destroy()
-        self.installed_packs_frame = self.packet.VerticalScrolledFrame(self.installed_packs_frame_border)
+        self.installed_packs_frame = self.packet.VerticalScrolledFrame(self.installed_packs_frame_border, width=300)
         self.installed_packs_frame.pack(fill=BOTH, expand=True)
 
         for i in self.installed_packs_shown.copy():
@@ -109,7 +111,7 @@ class mainclass(Frame):
                 if self.searching:
                     if i.startswith(self.searchBox.get().upper()):
                         a = self.packet.BUTTON(self.packet, self.installed_packs_frame.interior, i)
-                        a.pack(expand=True, fill=X)
+                        a.pack(expand=True, fill=X, pady=1, padx=0)
                         if self.amount_found == 0:
                             self.packet.window.bind_all("<Return>", lambda e: [a.click(), self.searchBox.delete(0, END)])
                         self.amount_found += 1
@@ -117,6 +119,6 @@ class mainclass(Frame):
                     self.packet.window.unbind_all('<Return>')
                     self.amount_found += 1
                     a = self.packet.BUTTON(self.packet, self.installed_packs_frame.interior, i)
-                    a.pack(expand=True, fill=X)
+                    a.pack(expand=True, fill=X, pady=1, padx=0)
         if self.amount_found == 0:
             Label(self.installed_packs_frame.interior, text="Nothing Found").pack()

@@ -4,16 +4,16 @@ import requests
 from bs4 import BeautifulSoup
 from GLOBAL import *
 
-class mainclass(Frame):
+class mainclass(ttk.Frame):
     def __init__(self, notebook, packet):
-        Frame.__init__(self, notebook)
+        ttk.Frame.__init__(self, notebook)
         self.packet = packet
         self.copy_Addons = self.packet.interpreter.ADDONS.copy()
 
         self.inner = packet.VerticalScrolledFrame(self, width=50)
         self.inner.pack(side=BOTTOM)
 
-        self.searchframe = Frame(self)
+        self.searchframe = ttk.Frame(self)
         self.searchframe.pack()
         self.searchBox = ttk.Entry(self.searchframe)
         self.searchBox.pack(side=LEFT)
@@ -107,7 +107,7 @@ class mainclass(Frame):
             self.amount_found += 1
 
         if self.amount_found == 0:
-            Label(self.inner.interior, text="Nothing Found").pack()
+            ttk.Label(self.inner.interior, text="Nothing Found").pack()
 
 
 
@@ -116,7 +116,7 @@ class mainclass(Frame):
     def createButton(self, list):
         self.images = []
 
-        lineFrame = Frame(self.inner.interior)
+        lineFrame = ttk.Frame(self.inner.interior)
         lineFrame.pack()
 
         counter = -1
@@ -126,7 +126,7 @@ class mainclass(Frame):
                 counter += 1
             else:
                 counter = 0
-                lineFrame = Frame(self.inner.interior)
+                lineFrame = ttk.Frame(self.inner.interior)
                 lineFrame.pack()
 
             itemframe = Frame(lineFrame, highlightthickness=1, highlightbackground="lightgrey")
@@ -155,6 +155,7 @@ class mainclass(Frame):
         self.exit_window()
         while a.is_alive():
             self.packet.window.update()
+        self.packet.homePage.redraw_frame()
         message.destroy()
 
     def get_url_paths(self, url, ext='', params={}):

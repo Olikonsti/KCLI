@@ -1,2 +1,2 @@
-global taskimport; taskimport = ['RESTORE', 'POWDERGAME', 'TK2D', 'PONG', 'GUI']
+global taskimport; taskimport = ['PARTICLEGAME', 'API_RUN', 'PYGEO', 'ANGELSPIEL', 'GUI']
 global tasklist; tasklist = ['GUI ']
