@@ -62,6 +62,7 @@ class mainclass(ttk.Frame):
         vscrollbar.pack(fill=Y, side=RIGHT, expand=FALSE)
         canvas = Canvas(self, bd=0, highlightthickness=0,
                            yscrollcommand=vscrollbar.set)
+        self.canvas = canvas
         canvas.pack(side=LEFT, fill=BOTH, expand=TRUE)
         vscrollbar.config(command=canvas.yview)
 

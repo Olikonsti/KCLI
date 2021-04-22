@@ -45,16 +45,25 @@ class mainclass(ttk.Frame):
         # properties
         if mode != "INSTALL":
             self.packet_onTop.interpreter.initializePacket(packet)
-        if requests.get(SERVERURL + "/" + packet + "/" + "1version.txt").status_code == 200:
-            ttk.Label(self.properties, text="Newest Version            " + requests.get(
-                SERVERURL + "/" + packet + "/" + "1version.txt").text).pack(anchor=NW)
+        try:
+            if requests.get(SERVERURL + "/" + packet + "/" + "1version.txt").status_code == 200:
+                ttk.Label(self.properties, text="Newest Version            " + requests.get(
+                    SERVERURL + "/" + packet + "/" + "1version.txt").text).pack(anchor=NW)
+        except:
+            pass
         if mode != "INSTALL":
-            ttk.Label(self.properties, text="Installed Version          " + str(self.packet_onTop.interpreter.loadedPackages[
-                packet].packversion)).pack(anchor=NW)
+            ttk.Label(self.properties,
+                      text="Installed Version          " + str(self.packet_onTop.interpreter.loadedPackages[
+                                                                   packet].packversion)).pack(anchor=NW)
 
-        if requests.get(SERVERURL + "/" + packet + "/" + "1developer.txt").status_code == 200:
-            ttk.Label(self.properties, text="Developer:                    " + requests.get(
-                SERVERURL + "/" + packet + "/" + "1developer.txt").text).pack(anchor=NW)
+        try:
+            if requests.get(SERVERURL + "/" + packet + "/" + "1developer.txt").status_code == 200:
+                ttk.Label(self.properties, text="Developer:                    " + requests.get(
+                    SERVERURL + "/" + packet + "/" + "1developer.txt").text).pack(anchor=NW)
+        except:
+            pass
+
+
 
 
 
@@ -71,11 +80,14 @@ class mainclass(ttk.Frame):
             self.runWithArgsbtn.pack(side=RIGHT)
             self.runWithArgsentry = ttk.Entry(self.runWithArgsFrame, width=10)
             self.runWithArgsentry.pack(side=LEFT)
-            if requests.get(SERVERURL + "/" + packet + "/" + "1version.txt").status_code == 200:
-                if float(self.packet_onTop.interpreter.loadedPackages[packet].packversion) < float(
-                        requests.get(SERVERURL + "/" + packet + "/" + "1version.txt").text):
-                    self.update_button = ttk.Button(self.actionsContainer, text="Update", command=self.update_app)
-                    self.update_button.pack(pady=1)
+            try:
+                if requests.get(SERVERURL + "/" + packet + "/" + "1version.txt").status_code == 200:
+                    if float(self.packet_onTop.interpreter.loadedPackages[packet].packversion) < float(
+                            requests.get(SERVERURL + "/" + packet + "/" + "1version.txt").text):
+                        self.update_button = ttk.Button(self.actionsContainer, text="Update", command=self.update_app)
+                        self.update_button.pack(pady=1)
+            except:
+                pass
 
             self.uninstall_button = ttk.Button(self.actionsContainer, text="Uninstall", command=self.uninstall_app)
             self.uninstall_button.pack(pady=1)
@@ -105,9 +117,12 @@ class mainclass(ttk.Frame):
             pass
 
         # packInfo
-        if requests.get(SERVERURL + "/" + packet + "/" + "1info.txt").status_code == 200:
-            self.infoLabel = Label(self.bottomframe, text=requests.get(SERVERURL + "/" + packet + "/" + "1info.txt").text, justify=LEFT)
-            self.infoLabel.pack(anchor=NW, padx=10, pady=10)
+        try:
+            if requests.get(SERVERURL + "/" + packet + "/" + "1info.txt").status_code == 200:
+                self.infoLabel = ttk.Label(self.bottomframe, text=requests.get(SERVERURL + "/" + packet + "/" + "1info.txt").text, justify=LEFT)
+                self.infoLabel.pack(anchor=NW, padx=10, pady=10)
+        except:
+            pass
 
     def exit_window(self):
         self.destroy()

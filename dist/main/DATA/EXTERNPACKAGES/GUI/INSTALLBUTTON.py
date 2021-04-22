@@ -1,13 +1,13 @@
 import tkinter.ttk as ttk
 from tkinter import *
 
-class mainclass(Frame):
+class mainclass(ttk.Frame):
     def __init__(self, packet, parent, item, install_mng):
         self.item = item
         self.packet = packet
         self.parent = parent
         self.install_mng = install_mng
-        Frame.__init__(self, parent)
+        ttk.Frame.__init__(self, parent)
 
         self.button = ttk.Button(self, width=20)
         self.button.config(command=self.click, text=self.item)

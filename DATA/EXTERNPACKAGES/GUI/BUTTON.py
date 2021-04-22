@@ -18,17 +18,19 @@ class mainclass(ttk.Frame):
         except:
             self.packet.interpreter.initializePacket(self.item)
         self.item_instance = self.packet.interpreter.loadedPackages[self.item]
-
-        if requests.get(SERVERURL + "/" + item + "/" + "1version.txt").status_code == 200:
-            if float(self.item_instance.packversion) < float(
-                    requests.get(SERVERURL + "/" + self.item + "/" + "1version.txt").text):
-                self.iconCanvas.create_oval(25, 8, 32, 16, fill="#0097cf", outline="")
-
         try:
-            self.icon = Image.open(DATAFOLDER + "EXTERNPACKAGES/" + item + "/1icon.png").convert("RGBA")
-            self.icon = self.icon.resize((22, 22), Image.BOX)
-            self.image = ImageTk.PhotoImage(self.icon)
-            self.iconCanvas.create_image(11, 11, image=self.image)
+            if requests.get(SERVERURL + "/" + item + "/" + "1version.txt").status_code == 200:
+                if float(self.item_instance.packversion) < float(
+                        requests.get(SERVERURL + "/" + self.item + "/" + "1version.txt").text):
+                    self.iconCanvas.create_oval(25, 8, 32, 16, fill="#0097cf", outline="")
+
+            try:
+                self.icon = Image.open(DATAFOLDER + "EXTERNPACKAGES/" + item + "/1icon.png").convert("RGBA")
+                self.icon = self.icon.resize((22, 22), Image.BOX)
+                self.image = ImageTk.PhotoImage(self.icon)
+                self.iconCanvas.create_image(11, 11, image=self.image)
+            except:
+                pass
         except:
             pass
 

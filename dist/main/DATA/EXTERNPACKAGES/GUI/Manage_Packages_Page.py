@@ -4,16 +4,16 @@ import requests
 from bs4 import BeautifulSoup
 from GLOBAL import *
 
-class mainclass(Frame):
+class mainclass(ttk.Frame):
     def __init__(self, notebook, packet):
-        Frame.__init__(self, notebook)
+        ttk.Frame.__init__(self, notebook)
         self.packet = packet
         self.copy_Addons = self.packet.interpreter.ADDONS.copy()
 
         self.inner = packet.VerticalScrolledFrame(self, width=50)
         self.inner.pack(side=BOTTOM)
 
-        self.searchframe = Frame(self)
+        self.searchframe = ttk.Frame(self)
         self.searchframe.pack()
         self.searchBox = ttk.Entry(self.searchframe)
         self.searchBox.pack(side=LEFT)
@@ -79,7 +79,10 @@ class mainclass(Frame):
         self.inner.pack(side=BOTTOM, fill=BOTH, expand=TRUE)
 
         packets = self.get_url_paths(SERVERURL, ".py")
-        packets.remove(packets[0])
+        try:
+            packets.remove(packets[0])
+        except:
+            pass
         for i in packets.copy():
             b = i
             b = b.removeprefix(SERVERURL)
@@ -93,8 +96,10 @@ class mainclass(Frame):
             b = b.removeprefix("/")
             b = b.removesuffix("/")
             self.packets_names.append(b)
-
-        self.packets_names.remove("message.txt")
+        try:
+            self.packets_names.remove("message.txt")
+        except:
+            pass
 
         if self.searching:
             for i in self.packets_names.copy():
@@ -107,7 +112,7 @@ class mainclass(Frame):
             self.amount_found += 1
 
         if self.amount_found == 0:
-            Label(self.inner.interior, text="Nothing Found").pack()
+            ttk.Label(self.inner.interior, text="Nothing Found").pack()
 
 
 
@@ -116,7 +121,7 @@ class mainclass(Frame):
     def createButton(self, list):
         self.images = []
 
-        lineFrame = Frame(self.inner.interior)
+        lineFrame = ttk.Frame(self.inner.interior)
         lineFrame.pack()
 
         counter = -1
@@ -126,7 +131,7 @@ class mainclass(Frame):
                 counter += 1
             else:
                 counter = 0
-                lineFrame = Frame(self.inner.interior)
+                lineFrame = ttk.Frame(self.inner.interior)
                 lineFrame.pack()
 
             itemframe = Frame(lineFrame, highlightthickness=1, highlightbackground="lightgrey")
@@ -155,14 +160,18 @@ class mainclass(Frame):
         self.exit_window()
         while a.is_alive():
             self.packet.window.update()
+        self.packet.homePage.redraw_frame()
         message.destroy()
 
     def get_url_paths(self, url, ext='', params={}):
-        response = requests.get(url, params=params)
-        if response.ok:
-            response_text = response.text
-        else:
-            return response.raise_for_status()
-        soup = BeautifulSoup(response_text, 'html.parser')
-        parent = [url + node.get('href') for node in soup.find_all('a') if not node.get('href').endswith(ext) and not node.get('href').startswith("?")]
-        return parent
+        try:
+            response = requests.get(url, params=params)
+            if response.ok:
+                response_text = response.text
+            else:
+                return response.raise_for_status()
+            soup = BeautifulSoup(response_text, 'html.parser')
+            parent = [url + node.get('href') for node in soup.find_all('a') if not node.get('href').endswith(ext) and not node.get('href').startswith("?")]
+            return parent
+        except:
+            return [""]

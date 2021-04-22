@@ -25,15 +25,18 @@ class mainclass(ttk.Frame):
         self.message_field = packet.VerticalScrolledFrame(self.message_field_border)
         self.message_field.pack(fill=BOTH, expand=True, anchor=NW, side=LEFT)
 
-        if requests.get(SERVERURL + "/" + "message.txt").status_code == 200:
+        try:
+            if requests.get(SERVERURL + "/" + "message.txt").status_code == 200:
 
-            txt = requests.get(
-                SERVERURL + "/message.txt").text
+                txt = requests.get(
+                    SERVERURL + "/message.txt").text
 
-            code = f'txt_ = {txt}'
-            exec(f"global txt_; txt_ = f'''{txt}'''")
+                code = f'txt_ = {txt}'
+                exec(f"global txt_; txt_ = f'''{txt}'''")
 
-            ttk.Label(self.message_field.interior, text=txt_, justify=LEFT).pack(anchor=NW, pady=5, padx=5)
+                ttk.Label(self.message_field.interior, text=txt_, justify=LEFT).pack(anchor=NW, pady=5, padx=5)
+        except:
+            ttk.Label(self.message_field.interior, text="Not connected to server", justify=LEFT).pack(anchor=NW, pady=5, padx=5)
 
 
 
@@ -53,7 +56,11 @@ class mainclass(ttk.Frame):
         self.installed_packs_frame = packet.VerticalScrolledFrame(self.installed_packs_frame_border, width=400)
         self.installed_packs_frame.pack(fill=BOTH, expand=True)
 
-        self.exclusion_list = ["-------"] #+ ADDONS
+        if self.packet.interpreter_showpacks == "True":
+            self.exclusion_list = ["-------"]
+        else:
+            self.exclusion_list = ["-------"] + ADDONS
+
         self.installed_packs_shown = []
 
         for i in packet.interpreter.ADDONS:
@@ -96,6 +103,13 @@ class mainclass(ttk.Frame):
         self.installed_packs_frame = self.packet.VerticalScrolledFrame(self.installed_packs_frame_border, width=300)
         self.installed_packs_frame.pack(fill=BOTH, expand=True)
 
+        if self.packet.theme == "equilux":
+            self.installed_packs_frame.canvas.config(bg="#464646")
+        if self.packet.theme == "adapta":
+            self.installed_packs_frame.canvas.config(bg="#FAFBFC")
+        if self.packet.theme == "arc":
+            self.installed_packs_frame.canvas.config(bg="#F5F6F7")
+
         for i in self.installed_packs_shown.copy():
             if i not in self.packet.interpreter.ADDONS:
                 self.installed_packs_shown.remove(i)
@@ -112,6 +126,12 @@ class mainclass(ttk.Frame):
                     if i.startswith(self.searchBox.get().upper()):
                         a = self.packet.BUTTON(self.packet, self.installed_packs_frame.interior, i)
                         a.pack(expand=True, fill=X, pady=1, padx=0)
+
+                        if self.packet.theme == "equilux":
+                            a.iconCanvas.config(bg="#464646")
+                        if self.packet.theme == "adapta":
+                            a.iconCanvas.config(bg="#FAFBFC")
+
                         if self.amount_found == 0:
                             self.packet.window.bind_all("<Return>", lambda e: [a.click(), self.searchBox.delete(0, END)])
                         self.amount_found += 1
@@ -120,5 +140,9 @@ class mainclass(ttk.Frame):
                     self.amount_found += 1
                     a = self.packet.BUTTON(self.packet, self.installed_packs_frame.interior, i)
                     a.pack(expand=True, fill=X, pady=1, padx=0)
+                    if self.packet.theme == "equilux":
+                        a.iconCanvas.config(bg="#464646")
+                    if self.packet.theme == "adapta":
+                        a.iconCanvas.config(bg="#FAFBFC")
         if self.amount_found == 0:
             Label(self.installed_packs_frame.interior, text="Nothing Found").pack()

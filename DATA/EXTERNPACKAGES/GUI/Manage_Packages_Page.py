@@ -79,7 +79,10 @@ class mainclass(ttk.Frame):
         self.inner.pack(side=BOTTOM, fill=BOTH, expand=TRUE)
 
         packets = self.get_url_paths(SERVERURL, ".py")
-        packets.remove(packets[0])
+        try:
+            packets.remove(packets[0])
+        except:
+            pass
         for i in packets.copy():
             b = i
             b = b.removeprefix(SERVERURL)
@@ -93,8 +96,10 @@ class mainclass(ttk.Frame):
             b = b.removeprefix("/")
             b = b.removesuffix("/")
             self.packets_names.append(b)
-
-        self.packets_names.remove("message.txt")
+        try:
+            self.packets_names.remove("message.txt")
+        except:
+            pass
 
         if self.searching:
             for i in self.packets_names.copy():
@@ -159,11 +164,14 @@ class mainclass(ttk.Frame):
         message.destroy()
 
     def get_url_paths(self, url, ext='', params={}):
-        response = requests.get(url, params=params)
-        if response.ok:
-            response_text = response.text
-        else:
-            return response.raise_for_status()
-        soup = BeautifulSoup(response_text, 'html.parser')
-        parent = [url + node.get('href') for node in soup.find_all('a') if not node.get('href').endswith(ext) and not node.get('href').startswith("?")]
-        return parent
+        try:
+            response = requests.get(url, params=params)
+            if response.ok:
+                response_text = response.text
+            else:
+                return response.raise_for_status()
+            soup = BeautifulSoup(response_text, 'html.parser')
+            parent = [url + node.get('href') for node in soup.find_all('a') if not node.get('href').endswith(ext) and not node.get('href').startswith("?")]
+            return parent
+        except:
+            return [""]
