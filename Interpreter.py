@@ -7,6 +7,7 @@ from PACKETS.UPDATE import *
 from PACKETS.UTIL import *
 
 
+
 class Interpreter():
     def __init__(self):
         console.log("Interpreter starting...")
@@ -65,7 +66,10 @@ class Interpreter():
             self.cmd = cmd
         else:
             print("\n")
-            self.cmd = console.input("[green]%> ")
+            try:
+                self.cmd = console.input("[green]%> ")
+            except:
+                pass
 
 
         self.cmd = shlex.split(self.cmd)

@@ -1,2 +1,2 @@
-global taskimport; taskimport = ['GUI', 'API_RUN', 'PONG', 'TK2D', 'PARTICLEGAME', 'PYGEO']
-global tasklist; tasklist = ['GUI ']
+global taskimport; taskimport = ['TK2D', 'PYGEO', 'MOVINGPIXEL']
+global tasklist; tasklist = []

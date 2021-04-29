@@ -1,5 +1,6 @@
 
-VERSION = "v1.0"
+VERSION = "v1.01"
+CONSOLE = True
 PYTHONVERSION = "3.9"
 VERSIONTYPE = "UNSAFE"
 
@@ -23,9 +24,25 @@ ADDONS = ["HELP", "STARTTASKS", "UTIL", "IMPORT", "INSTALL", "UNINSTALL", "UPDAT
 print("Starting...")
 print("Loading Enviroment Packages...\n")
 
+def c_print(me):
+    pass
+
+class Fake_Console():
+    def __init__(self):
+        pass
+    def log(self, mes=None):
+        pass
+    def input(self, b=""):
+        pass
+
 from rich.console import Console
 print("Loading rich.console...")
-console = Console()
+
+if CONSOLE:
+    console = Console()
+else:
+    console = Fake_Console()
+
 console.log("[green]Console set up finished")
 
 console.log("[yellow]Loading rich.print...")
@@ -35,6 +52,10 @@ console.log("[green]Print set up finished")
 console.log("[yellow]Loading pygame...")
 import pygame
 console.log("[green]pygame set up finished")
+
+console.log("[yellow]Loading random...")
+import random
+console.log("[green]random set up finished")
 
 console.log("[yellow]Loading bs4...")
 from bs4 import BeautifulSoup

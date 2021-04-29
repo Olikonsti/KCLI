@@ -1,6 +1,5 @@
 from GLOBAL import *
 
-
 class PACKET():
     def __init__(self):
         self.interpreter = None
