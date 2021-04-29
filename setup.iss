@@ -2,8 +2,8 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "KCLI"
-#define MyAppVersion "1.0"
-#define MyAppPublisher "kundv"
+#define MyAppVersion "1.1"
+#define MyAppPublisher "ksv"
 #define MyAppURL "http://ksite.ddns.net"
 #define MyAppExeName "main.exe"
 
@@ -23,7 +23,7 @@ DisableProgramGroupPage=yes
 ; Remove the following line to run in administrative install mode (install for all users.)
 PrivilegesRequired=lowest
 OutputDir=C:\Users\Konstantin\Desktop
-OutputBaseFilename=KCLIInstaller
+OutputBaseFilename=KCLIInstaller 1.1
 SetupIconFile=C:\Users\Konstantin\Downloads\icon (1).ico
 Compression=lzma
 SolidCompression=yes

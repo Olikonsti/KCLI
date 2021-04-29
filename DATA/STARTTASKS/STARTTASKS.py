@@ -1,2 +1,2 @@
-global taskimport; taskimport = []
-global tasklist; tasklist = []
+global taskimport; taskimport = ['GUI']
+global tasklist; tasklist = ['GUI ']
